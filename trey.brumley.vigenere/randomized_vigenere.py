@@ -56,20 +56,21 @@ def encrypt(plain_text_message,keyword,seed):
 	key = keywordFromSeed(seed)
 	cipher = buildVigenere(SYMBOLS,seed)
 	C = 0
+	C2 = 0
 	
 	# Loops through letter by letter to find the correct new value for decryption
 	for i in range(len(plain_text_message)):
 		
-		# Loops through to find X and Y values to decrypt
-		for j in range(size):
-			if cipher[j][0] == plain_text_message[i]:
-				C = j;
+		# Loops through to find X and Y values to encrypt
 		for k in range(size):
-			if cipher[C][k] == (key[i%len(key)]):
-				C = k
+			if cipher[0][k] == plain_text_message[i]:
+				C2 = k
+		for j in range(size):
+			if cipher[j][0] == (key[i%len(key)]):
+				C = j;
 		
 		# Appends the new character to the key	
-		ekey.append(cipher[0][C])
+		ekey.append(cipher[C][C2])
 	
 	# Creates the string and adds the characters in order, then returns
 	encrypted = ''.join(str(e) for e in ekey)
@@ -82,21 +83,20 @@ def decrypt(cipher_text_message,keyword,seed):
 	key = keywordFromSeed(seed)
 	cipher = buildVigenere(SYMBOLS,seed)
 	C = 0
-	C2 = 0
 	
 	# Loops through letter by letter to find the correct new value for encryption
 	for i in range(len(cipher_text_message)):
 		
 		# Loops through to find X and Y values to decrypt
 		for j in range(size):
-			if cipher[0][j] == (key[i%len(key)]):
-				C = j
+			if cipher[j][0] == (key[i%len(key)]):
+				C = j;
 		for k in range(size):
-			if cipher[C][0] == cipher_text_message[i]:
+			if cipher[C][k] == cipher_text_message[i]:
 				C2 = k
 						
 		# Appends the new character to the key					
-		dkey.append(cipher[C2][C])
+		dkey.append(cipher[0][C2])
 	
 	# Creates the string and adds the characters in order, then returns
 	decrypted = ''.join(str(d) for d in dkey)
