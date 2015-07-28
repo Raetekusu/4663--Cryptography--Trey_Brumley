@@ -55,7 +55,7 @@ def encrypt(plain_text_message,keyword,seed):
 	# Builds keyword and cipher from seed.
 	key = keywordFromSeed(seed)
 	cipher = buildVigenere(SYMBOLS,seed)
-	C = 0
+	C = -3
 	
 	# Loops through letter by letter to find the correct new value for decryption
 	for i in range(len(plain_text_message)):
